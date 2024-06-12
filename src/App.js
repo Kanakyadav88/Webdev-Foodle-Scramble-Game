@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import WordScramble from "./components/wordScramble.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app-container">
+      <header className="header">
+        <h1 className="text-2xl md:text-4xl">Welcome to Scramble World</h1>
       </header>
+      <main className="word-scramble">
+        <WordScramble />
+      </main>
+      <footer className="footer">
+        <p>&copy; 2024 Word Scramble Game</p>
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,77 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 6fr));
+  /* gap: 0.5px; Minimal gap between grid items */
+  justify-content: center;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(239, 233, 233);
+  font-size: 20px; /* Increase font size for better visibility */
+  font-weight: bold; /* Make the text bold */
+  border: 1px solid #ccc; /* Add a border to make the grid items more distinct */
+  text-transform: uppercase; /* Ensure text is in uppercase */
+}
+
+.guess-grid {
+  margin-bottom: 20px; /* Separate the two grids with some space */
+}
+
+.scrambled-grid {
+  margin-top: 10px; /* Separate the two grids with some space */
+}
+
+input, select {
+  font-size: 20px; /* Make the input text larger */
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 20px; /* Make the button text larger */
+  background-color: #be590c; /* Add a background color to the button */
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #b95905; /* Darken the button on hover */
+}
+
+.message {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px; /* Increase font size for messages */
+}
+
+.message.bg-green-400 {
+  background-color: #38a169; /* Success message color */
+}
+
+.message.bg-red-400 {
+  background-color: #e53e3e; /* Error message color */
+}
+
+.message.bg-yellow-400 {
+  background-color: #ecc94b; /* Warning message color */
+}
+
+.text-2xl {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.text-lg {
+  font-size: 20px;
+  font-weight: bold;
+}
+.text-md {
+  font-size: 15px;
+  /* font-weight: bold; */
+}
