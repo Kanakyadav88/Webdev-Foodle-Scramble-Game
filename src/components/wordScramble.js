@@ -1,29 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaExclamationTriangle } from 'react-icons/fa';
-import './word.css'; // Ensure this path is correct
+import './word.css';
 
-const WORDS = [
-    "kiwi",
-    "PineApple",
-    "Apple",
-    "NodeJs",
-    "Developer",
-    "Fruit",
-    "Induction",
-    "peanut",
-    "Vegetable",
-    "Potato",
-    "Peas",
-    "spices",
-    "utensil",
-    "plate",
-    "chips",
-    "garlic",
-    "ginger",
-    "Foodle"
-];
+import let_5 from './word list/let_5';
+import let_6 from './word list/let_6';
+import let_7 from './word list/let_7';
+import let_8 from './word list/let_8';
+import let_9 from './word list/let_9';
+import let_10 from './word list/let_10';
+import { type } from '@testing-library/user-event/dist/type';
 
-function WordScramble() {
+const WordScramble = () => {
     const [correctWord, setCorrectWord] = useState('');
     const [scrambledWord, setScrambledWord] = useState('');
     const [inputValue, setInputValue] = useState('');
@@ -37,27 +24,54 @@ function WordScramble() {
     const [maxScore, setMaxScore] = useState(0);
 
     useEffect(() => {
-        // Reset max score and level when the component mounts
-        localStorage.setItem('maxScore', 0);
-        localStorage.setItem('maxLevel', 0);
+        const storedMaxScore = localStorage.getItem('maxScore');
+        const storedMaxLevel = localStorage.getItem('maxLevel');
+        if (storedMaxScore) setMaxScore(parseInt(storedMaxScore, 10));
+        if (storedMaxLevel) setMaxLevel(parseInt(storedMaxLevel, 10));
     }, []);
 
-    const selectWord = () => {
-        const radIndex = Math.floor(Math.random() * WORDS.length);
-        return WORDS[radIndex];
+    useEffect(() => {
+        localStorage.setItem('maxScore', maxScore);
+        localStorage.setItem('maxLevel', maxLevel);
+    }, [maxScore, maxLevel]);
+
+    const getWordList = (level) => {
+        switch (level) {
+            case 1:
+                return let_5;
+            case 2:
+                return let_6;
+            case 3:
+                return let_7;
+            case 4:
+                return let_8;
+            case 5:
+                return let_9;
+            case 6:
+                return let_10;
+            default:
+                const allWords = [...let_5, ...let_6, ...let_7, ...let_8, ...let_9, ...let_10];
+                return allWords;
+        }
+    };
+
+    const selectWord = async () => {
+        const words = getWordList(level);
+        const radIndex = Math.floor(Math.random() * words.length);
+        return words[radIndex].trim().toUpperCase();
     };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value.toUpperCase());
     };
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
 
         if (inputValue !== "") {
             if (correctWord === inputValue) {
                 setMessage('Correct Answer!');
-                setClassName('bg-green-400');
+                setClassName('message bg-green-400');
                 const newScore = score + 1;
                 setScore(newScore);
 
@@ -78,18 +92,18 @@ function WordScramble() {
                 }
 
                 setInputValue('');
-                const word = selectWord();
-                setCorrectWord(word.toUpperCase());
+                const word = await selectWord();
+                setCorrectWord(word);
                 setScrambledWord(constructScrambledWord(word));
 
             } else {
                 setMessage('Wrong Answer!');
-                setClassName('bg-red-400');
+                setClassName('message bg-red-400');
                 setInputValue('');
             }
         } else {
             setMessage('Write a Word!');
-            setClassName('bg-yellow-400');
+            setClassName('message bg-yellow-400');
         }
     };
 
@@ -103,7 +117,7 @@ function WordScramble() {
         return shuffledArray.join('');
     };
 
-    const handleStartGame = (e) => {
+    const handleStartGame = async (e) => {
         e.preventDefault();
         setIsPlayOn(true);
         setInputValue('');
@@ -111,9 +125,12 @@ function WordScramble() {
         setScore(0); // Reset score when starting a new game
         setNumSwaps(1); // Reset swaps
         setLevel(1); // Reset level
-        const word = selectWord();
-        setCorrectWord(word.toUpperCase());
-        setScrambledWord(constructScrambledWord(word));
+
+        const word = await selectWord();
+        if (word) {
+            setCorrectWord(word);
+            setScrambledWord(constructScrambledWord(word));
+        }
     };
 
     const handleResetScramble = (e) => {
@@ -126,7 +143,7 @@ function WordScramble() {
     useEffect(() => {
         let clearMessage;
         if (message) {
-            clearMessage = setTimeout(() => setMessage(''), 800);
+            clearMessage = setTimeout(() => setMessage(''), 2500); // Extended timeout to 7 seconds
         }
         return () => {
             if (clearMessage) {
@@ -135,12 +152,18 @@ function WordScramble() {
         };
     }, [message]);
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleClick(e);
+        }
+    };
+
     return (
-        <form>
+        <form onSubmit={handleClick}>
             <div className='flex flex-col w-screen h-screen items-center justify-center p-0 sm:p-5'>
                 <div className='relative flex flex-col h-[50%] w-[100%] sm:h-[40%] sm:w-[100%] bg-gray-300 items-center justify-evenly'>
                     {Boolean(message) && (
-                        <div className='absolute top-20 left-10 sm:top-10 sm:left-9 p-1 text-white flex items-center justify-center'>
+                        <div className='absolute top-20 left-10 sm:top-10 sm:left-9 p-1 text-white flex items-center justify-center animate-fade-in-out'>
                             <p className={`message ${className} flex items-center justify-center`}>
                                 {message === 'Correct Answer!' && <FaCheckCircle className="mr-2" />}
                                 {message === 'Wrong Answer!' && <FaTimesCircle className="mr-2" />}
@@ -149,13 +172,21 @@ function WordScramble() {
                             </p>
                         </div>
                     )}
-                    <h1 className='w-full bg-#023047 text-white flex items-center mt-[-65px] h-[2rem] justify-center text-lg border uppercase tracking-widest'>Word Scramble</h1>
                     <div className='flex flex-col items-center justify-center'>
-                        <div className="mb-4">
-                            <p className='text-2xl text-#fb8500 mb-2 font-bold'>Score: {score}</p>
-                            <p className='text-lg text-#fb8500 mb-2 font-bold'>Level: {level}</p>
-                            <p className='text-md text-#fb8500 mb-2'>Max Score: {maxScore}</p>
-                            <p className='text-md text-#fb8500 mb-2'>Max Level: {maxLevel}</p>
+                        <div className="mb-4 flex justify-between w-full">
+                            <div className='score-container'>
+                                <p className='text-lg text-orange-500 mb-2 font-bold'>Score: {score}</p>
+                                <p className='text-lg text-orange-500 mb-2 font-bold'>Max Score: {maxScore}</p>
+                            </div>
+                            <div className='level-container'>
+                                <p className='text-lg text-orange-500 mb-2 font-bold'>Level: {level}</p>
+                                <p className='text-lg text-orange-500 mb-2 font-bold'>Max Level: {maxLevel}</p>
+                            </div>
+                            <div className='btn-container'>
+                                <button className='btn' onClick={handleResetScramble}> Reset </button>
+                                <button className='btn' type="submit"> Submit </button>
+                                {/* <button className='btn' onClick={type="submit"}> Submit </button> */}
+                            </div>
                         </div>
                         {isPlayOn ? (
                             <>
@@ -175,12 +206,8 @@ function WordScramble() {
                                         ))}
                                     </div>
                                 </div>
-                                <div className='mb-10 mt-5'>
-                                    <input className='input' type='text' onChange={handleInputChange} placeholder='Guess the word' value={inputValue} />
-                                    <input className='btn ml-2' onClick={handleClick} type="submit" value="Enter" />
-                                </div>
-                                <div className='w-full flex text-center items-center justify-center text-white mt-4'>
-                                    <button className='btn' onClick={handleResetScramble}>Reset Scramble</button>
+                                <div className='w-full flex justify-between items-center mb-10 mt-5'>
+                                    <input className='input' type='text' onChange={handleInputChange} onKeyDown={handleKeyDown} placeholder='Guess the word' value={inputValue} />
                                 </div>
                             </>
                         ) : (
@@ -190,7 +217,7 @@ function WordScramble() {
                         )}
                         {isPlayOn && (
                             <div className='w-full flex text-center items-center justify-center text-white mt-4'>
-                                <button className='btn' onClick={handleStartGame}>New Game</button>
+                                <button className='btn' onClick={handleStartGame}> New Game </button>
                             </div>
                         )}
                     </div>
@@ -198,6 +225,6 @@ function WordScramble() {
             </div>
         </form>
     );
-}
+};
 
 export default WordScramble;

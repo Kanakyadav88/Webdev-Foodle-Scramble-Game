@@ -1,77 +1,102 @@
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 6fr));
-  /* gap: 0.5px; Minimal gap between grid items */
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
   justify-content: center;
+  gap: 0.1px;
 }
 
 .grid-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: rgb(239, 233, 233);
-  font-size: 20px; /* Increase font size for better visibility */
-  font-weight: bold; /* Make the text bold */
-  border: 1px solid #ccc; /* Add a border to make the grid items more distinct */
-  text-transform: uppercase; /* Ensure text is in uppercase */
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+  font-size: 18px;
+  color: white;
+  border: 1px solid #07177e;
+  border-radius: 1rem;
+  text-transform: uppercase;
 }
 
+
 .guess-grid {
-  margin-bottom: 20px; /* Separate the two grids with some space */
+  margin-bottom: 10px;
+  margin-top: 20px
 }
 
 .scrambled-grid {
-  margin-top: 10px; /* Separate the two grids with some space */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 input, select {
-  font-size: 20px; /* Make the input text larger */
+  font-size: 20px;
 }
 
 .btn {
-  padding: 10px 20px;
-  font-size: 20px; /* Make the button text larger */
-  background-color: #be590c; /* Add a background color to the button */
+  padding: 0.3rem 0.5rem;
+  font-size: 20px;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);  /* Consistent dark blue button */
+  border-radius: 3rem;
   border: none;
-  color: white;
+  color: #e3e9ed; /* Adjusted to match the new color scheme */
   cursor: pointer;
-  margin-top: 20px;
+  margin: 35px 20px; 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* margin-left: 30px; */
 }
 
 .btn:hover {
-  background-color: #b95905; /* Darken the button on hover */
+  background-color: #a51818;
 }
 
 .message {
   padding: 10px;
   border-radius: 5px;
-  font-size: 18px; /* Increase font size for messages */
+  font-size: 18px;
 }
 
 .message.bg-green-400 {
-  background-color: #38a169; /* Success message color */
+  background-color: #38a169;
 }
 
 .message.bg-red-400 {
-  background-color: #e53e3e; /* Error message color */
+  background-color: #e53e3e;
 }
 
 .message.bg-yellow-400 {
-  background-color: #ecc94b; /* Warning message color */
+  background-color: #ecc94b;
 }
 
 .text-2xl {
   font-size: 22px;
   font-weight: bold;
+  font: serif;
 }
 
 .text-lg {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: bold;
+  font: serif;
 }
+
 .text-md {
   font-size: 15px;
-  /* font-weight: bold; */
+}
+
+.score-container,
+.level-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font: 	Georgia;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }

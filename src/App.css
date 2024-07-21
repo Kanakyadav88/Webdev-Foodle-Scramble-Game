@@ -14,7 +14,7 @@
   }
 
   .word-scramble {
-    @apply bg-white bg-opacity-80 p-6 rounded shadow text-center w-full max-w-md;
+    @apply bg-white bg-opacity-80 p-6 rounded shadow text-center w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl;
   }
 
   .header, .footer {
@@ -35,3 +35,12 @@
     @apply p-2 rounded text-white;
   }
 }
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* .animate-fade-in-out {
+  animation: fadeInOut 2s ease-in-out;
+} */
