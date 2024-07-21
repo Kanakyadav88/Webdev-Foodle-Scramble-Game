@@ -30,7 +30,7 @@ header {
 /* Main Content Styling */
 main {
   padding: 2rem;
-  max-width: 1000px; 
+  max-width: 700px; 
   margin: 0px auto; 
   background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); /* Updated gradient background */
   border-radius: 0rem; /* Rounded corners */
@@ -39,10 +39,10 @@ main {
 
 /* Footer Styling */
 footer {
-  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+  /* background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);  */
   color: white;
   text-align: center;
-  padding: 2rem;
+  padding: em;
   position: fixed;
   width: 100%;
   bottom: 0;

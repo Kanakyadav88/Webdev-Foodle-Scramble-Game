@@ -8,7 +8,7 @@ import let_7 from './word list/let_7';
 import let_8 from './word list/let_8';
 import let_9 from './word list/let_9';
 import let_10 from './word list/let_10';
-import { type } from '@testing-library/user-event/dist/type';
+// import { type } from '@testing-library/user-event/dist/type';
 
 const WordScramble = () => {
     const [correctWord, setCorrectWord] = useState('');
@@ -35,25 +35,30 @@ const WordScramble = () => {
         localStorage.setItem('maxLevel', maxLevel);
     }, [maxScore, maxLevel]);
 
-    const getWordList = (level) => {
-        switch (level) {
-            case 1:
-                return let_5;
-            case 2:
-                return let_6;
-            case 3:
-                return let_7;
-            case 4:
-                return let_8;
-            case 5:
-                return let_9;
-            case 6:
-                return let_10;
-            default:
-                const allWords = [...let_5, ...let_6, ...let_7, ...let_8, ...let_9, ...let_10];
-                return allWords;
-        }
+    const getWordList = () => {
+        const allWords = [...let_5, ...let_6, ...let_7, ...let_8, ...let_9, ...let_10];
+        return allWords;
     };
+
+    // const getWordList = (level) => {
+    //     switch (level) {
+    //         case 1:
+    //             return let_5;
+    //         case 2:
+    //             return let_6;
+    //         case 3:
+    //             return let_7;
+    //         case 4:
+    //             return let_8;
+    //         case 5:
+    //             return let_9;
+    //         case 6:
+    //             return let_10;
+    //         default:
+    //             const allWords = [...let_5, ...let_6, ...let_7, ...let_8, ...let_9, ...let_10];
+    //             return allWords;
+    //     }
+    // };
 
     const selectWord = async () => {
         const words = getWordList(level);
@@ -143,7 +148,7 @@ const WordScramble = () => {
     useEffect(() => {
         let clearMessage;
         if (message) {
-            clearMessage = setTimeout(() => setMessage(''), 2500); // Extended timeout to 7 seconds
+            clearMessage = setTimeout(() => setMessage(''), 2500); // Extended timeout to 2.5 seconds
         }
         return () => {
             if (clearMessage) {
@@ -173,20 +178,34 @@ const WordScramble = () => {
                         </div>
                     )}
                     <div className='flex flex-col items-center justify-center'>
-                        <div className="mb-4 flex justify-between w-full">
-                            <div className='score-container'>
-                                <p className='text-lg text-orange-500 mb-2 font-bold'>Score: {score}</p>
-                                <p className='text-lg text-orange-500 mb-2 font-bold'>Max Score: {maxScore}</p>
+                    <div className="mb-4 flex justify-between w-full">
+                        <div className='score-container'>
+                            <div className='flex flex-col items-center'>
+                                <p className='text-lg text-orange-500 mb-1 font-bold'>Score</p>
+                                <p className='text-2xl text-orange-500 font-bold'>{score}</p>
                             </div>
-                            <div className='level-container'>
-                                <p className='text-lg text-orange-500 mb-2 font-bold'>Level: {level}</p>
-                                <p className='text-lg text-orange-500 mb-2 font-bold'>Max Level: {maxLevel}</p>
+                            <div className='flex flex-col items-center'>
+                                <p className='text-lg text-orange-500 mb-1 font-bold'>Max Score</p>
+                                <p className='text-2xl text-orange-500 font-bold'>{maxScore}</p>
                             </div>
-                            <div className='btn-container'>
-                                <button className='btn' onClick={handleResetScramble}> Reset </button>
-                                <button className='btn' type="submit"> Submit </button>
-                                {/* <button className='btn' onClick={type="submit"}> Submit </button> */}
+                        </div>
+                        <div className='level-container'>
+                            <div className='flex flex-col items-center'>
+                                <p className='text-lg text-orange-500 mb-1 font-bold'>Level</p>
+                                <p className='text-2xl text-orange-500 font-bold'>{level}</p>
                             </div>
+                            <div className='flex flex-col items-center'>
+                                <p className='text-lg text-orange-500 mb-1 font-bold'>Max Level</p>
+                                <p className='text-2xl text-orange-500 font-bold'>{maxLevel}</p>
+                            </div>
+                        </div>
+                            {isPlayOn && (
+                                <div className='btn-container'>
+                                    <button className='btn' onClick={handleResetScramble}> Scramble </button>
+                                    <button className='btn' type="submit"> Submit </button>
+                                    {/* <button className='btn' onClick={type="submit"}> Submit </button> */}
+                                </div>
+                               )}
                         </div>
                         {isPlayOn ? (
                             <>

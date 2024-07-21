@@ -9,12 +9,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
-  font-size: 18px;
+  font-size: 19px;
   color: white;
-  border: 1px solid #07177e;
+  border: 1px solid #0b24c9;
   border-radius: 1rem;
   text-transform: uppercase;
 }
@@ -22,12 +22,12 @@
 
 .guess-grid {
   margin-bottom: 10px;
-  margin-top: 20px
+  margin-top: 10px
 }
 
 .scrambled-grid {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 input, select {
@@ -55,7 +55,7 @@ input, select {
 .message {
   padding: 10px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .message.bg-green-400 {
@@ -71,19 +71,26 @@ input, select {
 }
 
 .text-2xl {
-  font-size: 22px;
+  font-size: 30px;
   font-weight: bold;
   font: serif;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .text-lg {
-  font-size: 19px;
-  font-weight: bold;
+  font-size: 20px;
+  /* font-weight: bold; */
   font: serif;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .text-md {
-  font-size: 15px;
+  font-size: 18px;
+  /* font-weight: bold; */
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .score-container,
@@ -97,6 +104,6 @@ input, select {
 .btn-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
