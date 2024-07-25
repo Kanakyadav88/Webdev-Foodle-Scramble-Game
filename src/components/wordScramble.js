@@ -60,10 +60,16 @@ const WordScramble = () => {
     //     }
     // };
 
+    const scrambleWord = (Word) =>{
+        // function to scramble a word
+        let scrambledWord = Word.split('').sort(()=>0.5 - Math.random()).join('');
+        return scrambledWord;
+    }
     const selectWord = async () => {
         const words = getWordList(level);
         const radIndex = Math.floor(Math.random() * words.length);
         return words[radIndex].trim().toUpperCase();
+       
     };
 
     const handleInputChange = (e) => {
