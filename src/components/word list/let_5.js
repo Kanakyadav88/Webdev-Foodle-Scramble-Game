@@ -107,7 +107,6 @@ const let_5 = [
     "cover",
     "torta",
     "glaze",
-
     "crumb",
     "squid",
     "chive",
